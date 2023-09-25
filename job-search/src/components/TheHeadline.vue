@@ -1,7 +1,7 @@
 <template>
   <section>
     <h1 class="mb-14 text-8xl font-bold tracking-tighter">
-      <span  :class="actionClasses">{{ action }}</span>
+      <span :class="actionClasses">{{ action }}</span>
       <br />
       for everyone
     </h1>
@@ -23,19 +23,21 @@ export default {
   computed: {
     actionClasses() {
       return {
-        [this.action.toLowerCase()]: true
-        
+        [this.action.toLowerCase()]: true //for applying css classes dynamically
       }
     }
   },
   created() {
+    //lifecycle hook
     this.changeTitle()
   },
   beforeUnmount() {
+    // clear the interval when the component is destroyed
     clearInterval(this.interval)
   },
   methods: {
     changeTitle() {
+      // store the interval in a variable so we can clear it later
       this.interval = setInterval(() => {
         const actions = ['Build', 'Create', 'Design', 'Code']
         this.action = nextElementInList(actions, this.action)
@@ -61,6 +63,4 @@ export default {
 .code {
   color: #d93025;
 }
-
-
 </style>
