@@ -4,9 +4,11 @@
       <div
         class="mx-auto flex h-full flex-nowrap border-b border-solid border-brand-gray-1 px-8"
       >
-        <a :href="url" class="flex h-full items-center text-xl">{{
-          company
-        }}</a>
+        <router-link
+          :to="{ name: 'Home' }"
+          class="flex h-full items-center text-xl"
+          >Job Jam
+        </router-link>
 
         <nav class="ml-12 h-full">
           <ul class="flex h-full list-none">
@@ -34,9 +36,9 @@
 </template>
 
 <script>
-import ActionButton from "@/components/ActionButton.vue";
-import ProfileImage from "@/components/ProfileImage.vue";
-import TheSubnav from "@/components/TheSubnav.vue";
+import ActionButton from "@/components/Shared/ActionButton.vue";
+import ProfileImage from "@/components/Navigation/ProfileImage.vue";
+import TheSubnav from "@/components/Navigation/TheSubnav.vue";
 
 export default {
   name: "MainNav",
@@ -47,8 +49,6 @@ export default {
   },
   data() {
     return {
-      company: "Bobo Careers",
-      url: "https://careers.google.com",
       menuItems: [
         "Teams",
         "Locations",
