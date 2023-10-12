@@ -3,11 +3,7 @@
     <div class="mt-5">
       <fieldset>
         <ul class="flex flex-row flex-wrap">
-          <li
-            v-for="jobType in UNIQUE_JOB_TYPES"
-            :key="jobType"
-            class="h-8 w-1/2"
-          >
+          <li v-for="jobType in UNIQUE_JOB_TYPES" :key="jobType" class="h-8 w-1/2">
             <input
               :id="jobType"
               v-model="selectedJobTypes"
@@ -24,7 +20,27 @@
   </collapsible-accordion>
 </template>
 
-<script>
+<script setup>
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { useJobsStore } from '@/stores/jobs'
+import { useUserStore } from '@/stores/user'
+
+import CollapsibleAccordion from '@/components/Shared/CollapsibleAccordion.vue'
+const selectedJobTypes = ref([])
+
+const jobStore = useJobsStore()
+const UNIQUE_JOB_TYPES = computed(() => jobStore.UNIQUE_JOB_TYPES)
+
+const userStore = useUserStore()
+const route = useRoute()
+const selectJobType = () => {
+  userStore.ADD_SELECTED_JOB_TYPES(selectedJobTypes.value)
+  route.push({ name: 'JobResults' })
+}
+</script>
+
+<!-- <script>
 import { mapActions, mapState } from "pinia";
 
 import { useJobsStore, UNIQUE_JOB_TYPES } from "@/stores/jobs";
@@ -51,4 +67,4 @@ export default {
     },
   },
 };
-</script>
+</script> -->
